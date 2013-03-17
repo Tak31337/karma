@@ -5,20 +5,20 @@
  *
  *  Copyright (c) 2009, Hippos Development Team
  *
- *  This file is part of JHippo.
+ *  This file is part of Karma.
  * 
- *  JHippo is free software: you can redistribute it and/or modify
+ *  Karma is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  JHippo is distributed in the hope that it will be useful,
+ *  Karma is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with JHippo.  If not, see <http://www.gnu.org/licenses/>.
+ *  along with Karma.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.taksmind.karma;
 
@@ -54,19 +54,19 @@ public class Main {
     public static boolean autoVoice = true;
     
     /**
-     * public HashMap for all users signed into JHippo
+     * public HashMap for all users signed into Karma
      */
     public static HashMap<String, String> users = new HashMap<String, String>();
 
     /**
      * public declaration of our bot object
      */
-    public static JHippo bot;
+    public static Karma bot;
 
     /**
      * variable to handle our configuration file
      */
-    public static String configuration = "config/jHippo.properties";
+    public static String configuration = "config/Karma.properties";
     
     /**
      * variable to handle taking command line user input.
@@ -83,11 +83,11 @@ public class Main {
     /**
      * @param args arguments passed from command line
      * @throws Exception 
-     * JHippo command line based main method.
+     * Karma command line based main method.
      */
     public static void main(String[] args) throws Exception {
         /*GPLv3 copyright*/
-        System.out.println("JHippo Copyright (C) 2009 Hippos Development Team\n" 
+        System.out.println("Karma Copyright (C) 2009 Hippos Development Team\n" 
                            +"This program comes with ABSOLUTELY NO WARRANTY.\n"
                            +"This is free software, and you are welcome to redistribute it\n"
                            +"under certain conditions; see http://www.gnu.org/licenses/\n\n");
@@ -117,7 +117,7 @@ public class Main {
             
             server   = userInput.grabInput("Enter Server");
             password = userInput.grabInput("Enter Nickserv Password");
-            nick     = userInput.grabInput("Enter JHippo's Nick/IRC Handle");
+            nick     = userInput.grabInput("Enter Karma's Nick/IRC Handle");
             channel  = userInput.grabInput("Enter the channel to join");
             
             //makes our new file.
@@ -134,7 +134,7 @@ public class Main {
         }
 
         /*create our robot*/
-        bot = new JHippo();
+        bot = new Karma();
         bot.connect(properties.getProperty("server"));
         if ( properties.getProperty("password") != null ) {
             bot.identify(properties.getProperty("password"));
