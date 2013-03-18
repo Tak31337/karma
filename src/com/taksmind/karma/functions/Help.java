@@ -45,6 +45,7 @@ public class Help extends Function {
               Main.bot.sendMessage(channel, "   Registration(send Karma Bot a private messsage): \n");
               Main.bot.sendMessage(channel, "~register *password* \n");
               Main.bot.sendMessage(channel, "~login    *password* \n\n");
+              Main.bot.sendMessage(channel, "~access   *person* *new access level*   (rq. access lvl 4)");
               Main.bot.sendMessage(channel, " ");
 
               Main.bot.sendMessage(channel, "Normal commands: \n");
@@ -64,8 +65,6 @@ public class Help extends Function {
               Main.bot.sendMessage(channel, "~join       *channel*                 (rq. access lvl 3) \n");
               Main.bot.sendMessage(channel, "~part       *channel* *reason*        (rq. access lvl 3) \n");
               Main.bot.sendMessage(channel, "~quit                                 (rq. access lvl 4)\n");
-              Main.bot.sendMessage(channel, "~access *person* *new access level*   (rq. access lvl 4)");
-
         }
     }
 }

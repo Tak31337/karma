@@ -214,7 +214,7 @@ public class Kernel {
         publicThreadExecutor.execute( Say );
         publicThreadExecutor.execute( Join );
         publicThreadExecutor.execute( Crypto );
-        publicThreadExecutor.execute( Access );
+        //publicThreadExecutor.execute( Access );
         publicThreadExecutor.execute( Help );
         publicThreadExecutor.execute( Kick );
         publicThreadExecutor.execute( Vote );
@@ -236,5 +236,7 @@ public class Kernel {
         privateThreadExecutor = Executors.newCachedThreadPool();
         privateThreadExecutor.execute( Register );
         privateThreadExecutor.execute( Login );
+        privateThreadExecutor.execute( Access );
+        privateThreadExecutor.execute( Say );
     }
 }
