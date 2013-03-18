@@ -46,12 +46,12 @@ public class Access extends Function {
 
     public void run() {
         /*if there is a message store and check it*/
-        if (bot.hasMessage()) {
-            message = bot.getMessage();
+        if (bot.hasPrivateMessage()) {
+            message = bot.getPrivateMessage();
         }
 
         /*This method checks if the user has the proper access*/
-        if (checkAccess(3, bot.getSender()) == false) {
+        if (checkAccess(4, bot.getPrivateSender()) == false) {
             return;
         }
 
@@ -73,7 +73,7 @@ public class Access extends Function {
                 System.err.println("Error loading configuration file(s): [try !register first]");
             }
 
-            Main.bot.sendMessage(bot.getChannel(), "access level changed");
+            Main.bot.sendMessage(bot.getPrivateSender(), "access level changed");
         }
     }
 }

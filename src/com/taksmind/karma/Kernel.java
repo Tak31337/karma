@@ -211,7 +211,7 @@ public class Kernel {
     public void createFunctions() {
         publicThreadExecutor = Executors.newCachedThreadPool();
         publicThreadExecutor.execute( Quit );
-        publicThreadExecutor.execute( Say );
+        //publicThreadExecutor.execute( Say );
         publicThreadExecutor.execute( Join );
         publicThreadExecutor.execute( Crypto );
         //publicThreadExecutor.execute( Access );

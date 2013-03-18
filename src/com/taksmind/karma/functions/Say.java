@@ -38,12 +38,12 @@ public class Say extends Function {
 
     public void run() {
         /*if there is a message store and check it*/
-        if (bot.hasMessage()) {
-            message = bot.getMessage();
+        if (bot.hasPrivateMessage()) {
+            message = bot.getPrivateMessage();
         }
 
         /*This method checks if the user has the proper access*/
-        if (checkAccess(2, bot.getSender()) == false) {
+        if (checkAccess(2, bot.getPrivateSender()) == false) {
             return;
         }
 
