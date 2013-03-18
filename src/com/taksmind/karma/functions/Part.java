@@ -1,5 +1,5 @@
 /*
- *  Join.java
+ *  Part.java
  * 
  *  Created on Oct 25, 2009, 11:51:35 AM
  * 

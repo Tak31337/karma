@@ -38,6 +38,7 @@ import com.taksmind.karma.functions.Function;
 import com.taksmind.karma.functions.GetCard;
 import com.taksmind.karma.functions.Google;
 import com.taksmind.karma.functions.Help;
+import com.taksmind.karma.functions.Horoscope;
 import com.taksmind.karma.functions.Join;
 import com.taksmind.karma.functions.Kick;
 import com.taksmind.karma.functions.Part;
@@ -87,6 +88,7 @@ public class Kernel {
     private Function FloodProtection;
     private Function Draw;
     private Function GetCard;
+    private Function Horoscope;
     
     //registration functions
     private Function Register;
@@ -118,6 +120,7 @@ public class Kernel {
         FloodProtection = new FloodProtection();
         Draw            = new Draw();
         GetCard         = new GetCard();
+        Horoscope       = new Horoscope();
 
         Register = new Register();
         Login = new Login();
@@ -223,6 +226,7 @@ public class Kernel {
         publicThreadExecutor.execute( AutoVoice );
         publicThreadExecutor.execute( Draw );
         publicThreadExecutor.execute( GetCard );
+        publicThreadExecutor.execute( Horoscope );
     }
 
     /**
