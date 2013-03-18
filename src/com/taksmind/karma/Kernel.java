@@ -32,8 +32,10 @@ import com.taksmind.karma.events.Message;
 import com.taksmind.karma.events.PrivateMessage;
 import com.taksmind.karma.functions.AutoVoice;
 import com.taksmind.karma.functions.Crypto;
+import com.taksmind.karma.functions.Draw;
 import com.taksmind.karma.functions.FloodProtection;
 import com.taksmind.karma.functions.Function;
+import com.taksmind.karma.functions.GetCard;
 import com.taksmind.karma.functions.Google;
 import com.taksmind.karma.functions.Help;
 import com.taksmind.karma.functions.Join;
@@ -79,10 +81,12 @@ public class Kernel {
     private Function Part;
     private Function Slap;
     private Function Welcome;
-    private Function AutoVocie;
+    private Function AutoVoice;
 
     private Function Google;
     private Function FloodProtection;
+    private Function Draw;
+    private Function GetCard;
     
     //registration functions
     private Function Register;
@@ -109,9 +113,11 @@ public class Kernel {
         Part            = new Part();
         Slap            = new Slap();
         Welcome         = new Welcome();
-        AutoVocie       = new AutoVoice();
+        AutoVoice       = new AutoVoice();
 
         FloodProtection = new FloodProtection();
+        Draw            = new Draw();
+        GetCard         = new GetCard();
 
         Register = new Register();
         Login = new Login();
@@ -214,7 +220,9 @@ public class Kernel {
         publicThreadExecutor.execute( Part );
         publicThreadExecutor.execute( Slap );
         publicThreadExecutor.execute( Welcome );
-        publicThreadExecutor.execute( AutoVocie );
+        publicThreadExecutor.execute( AutoVoice );
+        publicThreadExecutor.execute( Draw );
+        publicThreadExecutor.execute( GetCard );
     }
 
     /**

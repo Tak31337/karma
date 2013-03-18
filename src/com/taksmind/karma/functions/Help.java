@@ -49,6 +49,8 @@ public class Help extends Function {
 
               Main.bot.sendMessage(channel, "Normal commands: \n");
               Main.bot.sendMessage(channel, "~md5      *string to encrypt* \n");
+              Main.bot.sendMessage(channel, "~draw     (draws a random tarot card from Major Arcana) \n");
+              Main.bot.sendMessage(channel, "~card      *Major Arcana tarot card name* \n");
               Main.bot.sendMessage(channel, "~google   *string to search* \n");
               Main.bot.sendMessage(channel, "~say      *send to* *message*         (rq. access lvl 2) \n\n");
               Main.bot.sendMessage(channel, "~slap     *nick*                      (rq. access lvl 2) \n\n");
