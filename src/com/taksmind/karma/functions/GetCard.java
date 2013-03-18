@@ -46,9 +46,10 @@ public class GetCard extends Function {
         }
 
         if (message.startsWith("~card")) {
-            tokenize(true, 5, message);
-            define = (String) tokenParameters.nextElement();
+            tokenize(false, 6, message);
+            define = parameters;
             Card definition = deck.getByName(define);
+            
             if(definition != null) {
             	Main.bot.sendMessage(channel, definition.toString());
             }
