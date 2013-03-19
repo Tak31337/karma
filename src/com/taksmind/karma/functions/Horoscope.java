@@ -55,18 +55,18 @@ public class Horoscope extends Function {
     	months.put("11", "november");
     	months.put("12", "december");
     	
-    	zodiac.put("cancer", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/cancer.html");
-    	zodiac.put("aries", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/aries.html");
-    	zodiac.put("taurus", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/taurus.html");
-    	zodiac.put("gemini", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/gemini.html");
-    	zodiac.put("leo", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/leo.html");
-    	zodiac.put("libra", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/libra.html");
-    	zodiac.put("virgo", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/virgo.html");
-    	zodiac.put("scorpio", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/scorpio.html");
-    	zodiac.put("sagittarius", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/sagittarius.html");
-    	zodiac.put("capricorn", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/capricorn.html");
-    	zodiac.put("aquarius", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/aquarius.html");
-    	zodiac.put("pisces", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/pisces.html");
+    	zodiac.put("cancer", "http://my.horoscope.com/astrology/free-daily-horoscope-cancer.html");
+    	zodiac.put("aries", "http://my.horoscope.com/astrology/free-daily-horoscope-aries.html");
+    	zodiac.put("taurus", "http://my.horoscope.com/astrology/free-daily-horoscope-taurus.html");
+    	zodiac.put("gemini", "http://my.horoscope.com/astrology/free-daily-horoscope-gemini.html");
+    	zodiac.put("leo", "http://my.horoscope.com/astrology/free-daily-horoscope-leo.html");
+    	zodiac.put("libra", "http://my.horoscope.com/astrology/free-daily-horoscope-libra.html");
+    	zodiac.put("virgo", "http://my.horoscope.com/astrology/free-daily-horoscope-virgo.html");
+    	zodiac.put("scorpio", "http://my.horoscope.com/astrology/free-daily-horoscope-scorpio.html");
+    	zodiac.put("sagittarius", "http://my.horoscope.com/astrology/free-daily-horoscope-sagittarius.html");
+    	zodiac.put("capricorn", "http://my.horoscope.com/astrology/free-daily-horoscope-capricorn.html");
+    	zodiac.put("aquarius", "http://my.horoscope.com/astrology/free-daily-horoscope-aquarius.html");
+    	zodiac.put("pisces", "http://my.horoscope.com/astrology/free-daily-horoscope-pisces.html");
     }
 
     @Override
