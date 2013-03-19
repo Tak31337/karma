@@ -39,6 +39,7 @@ public class Horoscope extends Function {
     private int day;
     private String suffix;
     private HashMap<String, String> months = new HashMap<String, String>();
+    private HashMap<String, String> zodiac = new HashMap<String, String>();
     
     public Horoscope() {
     	months.put("01", "january");
@@ -53,6 +54,19 @@ public class Horoscope extends Function {
     	months.put("10", "october");
     	months.put("11", "november");
     	months.put("12", "december");
+    	
+    	zodiac.put("cancer", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/cancer.html");
+    	zodiac.put("aries", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/aries.html");
+    	zodiac.put("taurus", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/taurus.html");
+    	zodiac.put("gemini", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/gemini.html");
+    	zodiac.put("leo", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/leo.html");
+    	zodiac.put("libra", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/libra.html");
+    	zodiac.put("virgo", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/virgo.html");
+    	zodiac.put("scorpio", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/scorpio.html");
+    	zodiac.put("sagittarius", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/sagittarius.html");
+    	zodiac.put("capricorn", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/capricorn.html");
+    	zodiac.put("aquarius", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/aquarius.html");
+    	zodiac.put("pisces", "http://www.astrology.com.au/astrology/12-signs-of-the-zodiac/pisces.html");
     }
 
     @Override
@@ -66,6 +80,14 @@ public class Horoscope extends Function {
         if (message.startsWith("~zodiac")) {
             tokenize(true, 7, message);
             month = (String) tokenParameters.nextElement();
+            
+            for( String sign : zodiac.keySet() ) {
+            	if( sign.equalsIgnoreCase(month) ) { //if the first parameter is a zodiac sign
+            		Main.bot.sendMessage(channel, zodiac.get(sign));
+            		return;
+            	}
+            }
+            
             day   = Integer.parseInt((String) tokenParameters.nextElement());
             
             if(Integer.toString(day).endsWith("1")) {
