@@ -46,12 +46,12 @@ public class Main {
     /**
      * Welcome message variable
      */
-    public static boolean welcome = true;
+    public static boolean welcome = false;
     
     /**
      * 
      */
-    public static boolean autoVoice = true;
+    public static boolean autoVoice = false;
     
     /**
      * public HashMap for all users signed into Karma
