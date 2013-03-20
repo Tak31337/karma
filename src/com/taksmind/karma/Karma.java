@@ -93,9 +93,14 @@ public class Karma extends PircBot {
             String message) {
 
         calendar = Calendar.getInstance().getTime();
-        //timeStamp = calendar.toString();
-
+        //timeStamp = calendar.toString();        
         sendEvent.onMessage(channel, sender, login, hostname, message, calendar);
+        if( message.startsWith("~") ) {
+        	Main.ai.add(message.substring(0, message.length()));
+        }
+        else {
+        	Main.ai.add(message);
+        }
     }
 
     @Override

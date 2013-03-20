@@ -45,6 +45,7 @@ import com.taksmind.karma.functions.Part;
 import com.taksmind.karma.functions.Quit;
 import com.taksmind.karma.functions.Say;
 import com.taksmind.karma.functions.Slap;
+import com.taksmind.karma.functions.Speak;
 import com.taksmind.karma.functions.Welcome;
 import com.taksmind.karma.functions.Authentication.Access;
 import com.taksmind.karma.functions.Authentication.Login;
@@ -89,6 +90,7 @@ public class Kernel {
     private Function Draw;
     private Function GetCard;
     private Function Horoscope;
+    private Function Speak;
     
     //registration functions
     private Function Register;
@@ -121,6 +123,7 @@ public class Kernel {
         Draw            = new Draw();
         GetCard         = new GetCard();
         Horoscope       = new Horoscope();
+        Speak           = new Speak();
 
         Register = new Register();
         Login = new Login();
@@ -211,10 +214,9 @@ public class Kernel {
     public void createFunctions() {
         publicThreadExecutor = Executors.newCachedThreadPool();
         publicThreadExecutor.execute( Quit );
-        //publicThreadExecutor.execute( Say );
+        publicThreadExecutor.execute( Speak );
         publicThreadExecutor.execute( Join );
         publicThreadExecutor.execute( Crypto );
-        //publicThreadExecutor.execute( Access );
         publicThreadExecutor.execute( Help );
         publicThreadExecutor.execute( Kick );
         publicThreadExecutor.execute( Vote );

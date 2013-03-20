@@ -51,6 +51,7 @@ public class Help extends Function {
               Main.bot.sendMessage(channel, "Normal commands: \n");
               Main.bot.sendMessage(channel, "~md5      *string to encrypt* \n");
               Main.bot.sendMessage(channel, "~draw     (draws a random tarot card from Major Arcana) \n");
+              Main.bot.sendMessage(channel, "~speak    *message* (talk to me.) \n");
               Main.bot.sendMessage(channel, "~card     *Major Arcana tarot card name* \n");
               Main.bot.sendMessage(channel, "~zodiac   *mm* *dd* (links to your birthday zodiac) also get daily horoscopes: ex. ~zodiac taurus\n");
               Main.bot.sendMessage(channel, "~google   *string to search* \n");

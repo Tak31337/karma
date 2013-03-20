@@ -22,12 +22,14 @@
  */
 package com.taksmind.karma;
 
-import java.util.Properties;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Properties;
+
+import org.jibble.jmegahal.JMegaHal;
 
 import com.taksmind.karma.util.Delete2;
 import com.taksmind.karma.util.TakeInput;
@@ -63,6 +65,11 @@ public class Main {
      */
     public static Karma bot;
 
+    /**
+     * public declaration of our brain.
+     */
+    public static JMegaHal ai;
+    
     /**
      * variable to handle our configuration file
      */
@@ -133,6 +140,13 @@ public class Main {
             properties.store(new FileOutputStream(configuration), null);
         }
 
+        ai = new JMegaHal();
+        ai.add("My name is karma");
+        ai.add("Hello, how are you doing?");
+        ai.add("this sucks. :/");
+        ai.add("google it!");
+        ai.add("Have you tried the ~help command?");
+        
         /*create our robot*/
         bot = new Karma();
         bot.connect(properties.getProperty("server"));
