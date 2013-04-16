@@ -25,9 +25,10 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.taksmind.karma.Main;
-import com.taksmind.karma.util.JSONArray;
-import com.taksmind.karma.util.JSONObject;
+import com.taksmind.karma.util.google.GoogleResult;
+import com.taksmind.karma.util.google.Results;
 
 
 /**
@@ -44,6 +45,7 @@ public class Google extends Function {
     private String message;
     private String channel;
 	private String escapedParameters;
+	ObjectMapper mapper = new ObjectMapper();
 	private final String HTTP_REFERER = "http://www.taksmind.com/";
     
     @Override
@@ -72,7 +74,6 @@ public class Google extends Function {
     	System.out.println(" Querying for " + query);
 
     	try {
-
     	    URL url = new URL("http://ajax.googleapis.com/ajax/services/search/web?start=0&rsz=small&v=1.0&q=" + query);
     	    URLConnection connection = url.openConnection();
     	    connection.addRequestProperty("Referer", HTTP_REFERER);
@@ -85,24 +86,17 @@ public class Google extends Function {
     	    while((line = reader.readLine()) != null) {
     	    	builder.append(line);
     	    }
-
     	    String response = builder.toString();
-    	    JSONObject json = new JSONObject(response);
+    	    GoogleResult result = mapper.readValue(response,GoogleResult.class);
 
-    	    System.out.println("Total results = " +
-    	      json.getJSONObject("responseData")
-    	      .getJSONObject("cursor")
-    	      .getString("estimatedResultCount"));
- 
-    	    JSONArray ja = json.getJSONObject("responseData")
-    	    .getJSONArray("results");
+    	    System.out.println("Total results = " + result.getResponseData().getCursor().getEstimatedResultCount());
 
     	    Main.bot.sendMessage(channel, " Results:");
-    	    for (int i = 0; i < ja.length(); i++) {
-    	    	Main.bot.sendMessage(channel, (i+1) + ". ");
-    	    	JSONObject j = ja.getJSONObject(i);
-    	    	Main.bot.sendMessage(channel, j.getString("titleNoFormatting"));
-    	    	Main.bot.sendMessage(channel, j.getString("url"));
+    	    int i=0;
+    	    for (Results r : result.getResponseData().getResults() ) {
+    	    	i++;
+    	    	Main.bot.sendMessage(channel, i + ": " + r.getTitleNoFormatting());
+    	    	Main.bot.sendMessage(channel, r.getUrl());
     	    }
     	  }
     	  catch (Exception e) {
