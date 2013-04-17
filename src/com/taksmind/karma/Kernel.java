@@ -36,7 +36,6 @@ import com.taksmind.karma.functions.Draw;
 import com.taksmind.karma.functions.FloodProtection;
 import com.taksmind.karma.functions.Function;
 import com.taksmind.karma.functions.GetCard;
-import com.taksmind.karma.functions.Google;
 import com.taksmind.karma.functions.Help;
 import com.taksmind.karma.functions.Horoscope;
 import com.taksmind.karma.functions.Join;
@@ -51,6 +50,7 @@ import com.taksmind.karma.functions.Authentication.Access;
 import com.taksmind.karma.functions.Authentication.Login;
 import com.taksmind.karma.functions.Authentication.Register;
 import com.taksmind.karma.util.Vote;
+import com.taksmind.karma.util.google.Google;
 
 
 

@@ -43,7 +43,7 @@ public class Main {
     /**
      * debugging mode variable
      */
-    public static boolean debug = false;
+    public static boolean debug = true;
     
     /**
      * Welcome message variable

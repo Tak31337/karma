@@ -1,7 +1,6 @@
 package com.taksmind.karma.tarot;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Deck {
 	private int draw;
