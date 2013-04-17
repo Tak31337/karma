@@ -84,6 +84,7 @@ public class Main {
     private static String   password;
     private static String   nick;
     private static String   channel;
+    private static String   plugins;
     
     private static File file;
     private static File configDirectory;
@@ -122,10 +123,11 @@ public class Main {
             System.err.println("Error loading " + configuration + " Correctly generating now."); 
             Delete2.delete(configuration);
             
-            server   = userInput.grabInput("Enter Server");
-            password = userInput.grabInput("Enter Nickserv Password");
-            nick     = userInput.grabInput("Enter Karma's Nick/IRC Handle");
-            channel  = userInput.grabInput("Enter the channel to join");
+            server   = userInput.grabInput("Enter IRC Server: ");
+            password = userInput.grabInput("Enter Nickserv Password: ");
+            nick     = userInput.grabInput("Enter Karma's Nick/IRC Handle: ");
+            channel  = userInput.grabInput("Enter the channel to join: ");
+            plugins  = userInput.grabInput("Enter plugin directory: ");
             
             //makes our new file.
             file = new File(configuration);
@@ -136,6 +138,7 @@ public class Main {
             properties.put("password", password);
             properties.put("nick", nick);
             properties.put("channel", channel);
+            properties.put("plugins", plugins);
             
             properties.store(new FileOutputStream(configuration), null);
         }
