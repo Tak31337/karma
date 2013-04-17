@@ -77,8 +77,8 @@ public class Log extends Function {
 	        client.setDataTimeout(6000000);
 	        client.setConnectTimeout(6000000);
 	        
-	        client.connect("ftp.taksmind.com", 21);
-	        client.login("tak31337", "B1aqu3sp0T");
+	        client.connect(ftpServer, 21);
+	        client.login(ftpUser, ftpPassword);
 	        
 	        client.changeWorkingDirectory("/downloads/logs");
 	        FileInputStream fis = new FileInputStream(new File("logs/" + date + ".log"));
