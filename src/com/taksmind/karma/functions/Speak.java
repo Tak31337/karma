@@ -41,11 +41,6 @@ public class Speak extends Function {
             channel = bot.getChannel();
         }
 
-        /*This method checks if the user has the proper access*/
-        if (checkAccess(3, bot.getSender()) == false) {
-            return;
-        }
-
         if (message.startsWith("~speak")) {
             tokenize(false, 7, message);
             if( Main.debug ) {
