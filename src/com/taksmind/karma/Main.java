@@ -43,7 +43,7 @@ public class Main {
     /**
      * debugging mode variable
      */
-    public static boolean debug = true;
+    public static boolean debug = false;
     
     /**
      * Welcome message variable
@@ -75,6 +75,7 @@ public class Main {
      */
     public static String configuration = "config/Karma.properties";
     
+    
     /**
      * variable to handle taking command line user input.
      * (and subset variables to store data)
@@ -85,6 +86,9 @@ public class Main {
     private static String   nick;
     private static String   channel;
     private static String   plugins;
+    private static String   ftpServer;
+    private static String   ftpUser;
+    private static String   ftpPassword;
     
     private static File file;
     private static File configDirectory;
@@ -128,6 +132,9 @@ public class Main {
             nick     = userInput.grabInput("Enter Karma's Nick/IRC Handle: ");
             channel  = userInput.grabInput("Enter the channel to join: ");
             plugins  = userInput.grabInput("Enter plugin directory: ");
+            ftpServer = userInput.grabInput("Enter your FTP server (optional): ");
+            ftpUser  = userInput.grabInput("Enter your FTP username (optional): ");
+            ftpPassword = userInput.grabInput("Enter your FTP password (optional): ");
             
             //makes our new file.
             file = new File(configuration);
@@ -139,6 +146,9 @@ public class Main {
             properties.put("nick", nick);
             properties.put("channel", channel);
             properties.put("plugins", plugins);
+            properties.put("ftpServer", ftpServer);
+            properties.put("ftpUser", ftpUser);
+            properties.put("ftpPassword", ftpPassword);
             
             properties.store(new FileOutputStream(configuration), null);
         }

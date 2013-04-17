@@ -22,6 +22,11 @@
  */
 package com.taksmind.karma;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
@@ -40,6 +45,7 @@ import com.taksmind.karma.functions.Help;
 import com.taksmind.karma.functions.Horoscope;
 import com.taksmind.karma.functions.Join;
 import com.taksmind.karma.functions.Kick;
+import com.taksmind.karma.functions.Log;
 import com.taksmind.karma.functions.Part;
 import com.taksmind.karma.functions.Quit;
 import com.taksmind.karma.functions.Say;
@@ -59,6 +65,14 @@ import com.taksmind.karma.util.google.Google;
  * @author tak <tak@taksmind.com>
  */
 public class Kernel {
+	/**
+	 * log stuff
+	 */
+    private static File logDirectory;
+    private static FileWriter logFile;
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");      
+	private static String date;
+	
     /**
      * Object to handle public threads
      */
@@ -91,6 +105,7 @@ public class Kernel {
     private Function GetCard;
     private Function Horoscope;
     private Function Speak;
+    private Function Log;
     
     //registration functions
     private Function Register;
@@ -124,6 +139,7 @@ public class Kernel {
         GetCard         = new GetCard();
         Horoscope       = new Horoscope();
         Speak           = new Speak();
+        Log             = new Log();
 
         Register = new Register();
         Login = new Login();
@@ -155,6 +171,29 @@ public class Kernel {
         Message.eventStart(args);
 
         createFunctions();
+        
+        try {
+    		logDirectory = new File("logs");
+    		if ( !logDirectory.isDirectory() ) {
+    			logDirectory.mkdir();
+    		}
+    		date = sdf.parse(sdf.format(new Date())).toString().replaceAll(" ", "_").replaceAll("_[0-9]+:[0-9]+:[0-9]+.CDT", "");
+    		logFile = new FileWriter(logDirectory.getAbsolutePath() + "/" + date + ".log", true);
+    		logFile.write(channel + ":" + sender + ":" + message + "\n");
+    		logFile.close();
+    	} catch (ParseException e) {
+			System.err.println("Can not parse log file.. trying to create.");
+			try {
+				logFile = new FileWriter(logDirectory.getAbsolutePath() + date + ".log", false);
+			} catch (IOException e1) {
+				System.err.println("Can not create file..");
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+    	} catch (IOException ioex) {
+    		System.err.println("Can not open log file..");
+    		ioex.printStackTrace();
+		}
 
         /*runs debugging method if activated*/
         if (Main.debug) {
@@ -229,6 +268,7 @@ public class Kernel {
         publicThreadExecutor.execute( Draw );
         publicThreadExecutor.execute( GetCard );
         publicThreadExecutor.execute( Horoscope );
+        publicThreadExecutor.execute( Log );
     }
 
     /**

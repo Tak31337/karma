@@ -34,7 +34,7 @@ import com.taksmind.karma.util.Listener;
 public class Function implements Runnable {
     /*listener object than all functions can use*/
 
-    protected Listener bot = new Listener();
+    protected static Listener bot = new Listener();
     protected StringTokenizer tokenParameters;
     protected String parameters;
 
