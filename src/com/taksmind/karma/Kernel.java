@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import com.taksmind.karma.events.Event;
 import com.taksmind.karma.events.Message;
@@ -45,7 +47,6 @@ import com.taksmind.karma.functions.Help;
 import com.taksmind.karma.functions.Horoscope;
 import com.taksmind.karma.functions.Join;
 import com.taksmind.karma.functions.Kick;
-import com.taksmind.karma.functions.Log;
 import com.taksmind.karma.functions.Part;
 import com.taksmind.karma.functions.Quit;
 import com.taksmind.karma.functions.Say;
@@ -55,6 +56,7 @@ import com.taksmind.karma.functions.Welcome;
 import com.taksmind.karma.functions.Authentication.Access;
 import com.taksmind.karma.functions.Authentication.Login;
 import com.taksmind.karma.functions.Authentication.Register;
+import com.taksmind.karma.functions.scheduled.Log;
 import com.taksmind.karma.util.Vote;
 import com.taksmind.karma.util.google.Google;
 
@@ -81,7 +83,11 @@ public class Kernel {
      * Object to handle private threads.
      */
     public ExecutorService privateThreadExecutor;
-
+    /**
+     * Object to handle scheduled operations.
+     */
+    ScheduledExecutorService timedExecutor = Executors.newSingleThreadScheduledExecutor();
+    
     /*imported events*/
     private Event Message;
     private Event PrivateMessage;
@@ -105,7 +111,7 @@ public class Kernel {
     private Function GetCard;
     private Function Horoscope;
     private Function Speak;
-    private Function Log;
+    private Runnable Log;
     
     //registration functions
     private Function Register;
@@ -144,6 +150,11 @@ public class Kernel {
         Register = new Register();
         Login = new Login();
         Access = new Access();
+        
+        /**
+         * scheduled services
+         */
+        timedExecutor.schedule(Log, 10, TimeUnit.MINUTES);
     }
 
     /**
@@ -177,7 +188,7 @@ public class Kernel {
     		if ( !logDirectory.isDirectory() ) {
     			logDirectory.mkdir();
     		}
-    		date = sdf.parse(sdf.format(new Date())).toString().replaceAll(" ", "_").replaceAll("_[0-9]+:[0-9]+:[0-9]+.CDT", "");
+    		date = sdf.parse(sdf.format(new Date())).toString().replaceAll(" ", "").replaceAll("[0-9]+:[0-9]+:[0-9]+CDT", "");
     		logFile = new FileWriter(logDirectory.getAbsolutePath() + "/" + date + ".log", true);
     		logFile.write(channel + ":" + sender + ":" + message + "\n");
     		logFile.close();
@@ -268,7 +279,6 @@ public class Kernel {
         publicThreadExecutor.execute( Draw );
         publicThreadExecutor.execute( GetCard );
         publicThreadExecutor.execute( Horoscope );
-        publicThreadExecutor.execute( Log );
     }
 
     /**
