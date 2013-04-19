@@ -154,7 +154,9 @@ public class Kernel {
         /**
          * scheduled services
          */
-        timedExecutor.schedule(Log, 10, TimeUnit.MINUTES);
+        if ( Main.logging ) {
+        	timedExecutor.schedule(Log, 10, TimeUnit.MINUTES);
+        }
     }
 
     /**
@@ -183,28 +185,30 @@ public class Kernel {
 
         createFunctions();
         
-        try {
-    		logDirectory = new File("logs");
-    		if ( !logDirectory.isDirectory() ) {
-    			logDirectory.mkdir();
-    		}
-    		date = sdf.parse(sdf.format(new Date())).toString().replaceAll(" ", "").replaceAll("[0-9]+:[0-9]+:[0-9]+CDT", "");
-    		logFile = new FileWriter(logDirectory.getAbsolutePath() + "/" + date + ".log", true);
-    		logFile.write(channel + ":" + sender + ":" + message + "\n");
-    		logFile.close();
-    	} catch (ParseException e) {
-			System.err.println("Can not parse log file.. trying to create.");
-			try {
-				logFile = new FileWriter(logDirectory.getAbsolutePath() + date + ".log", false);
-			} catch (IOException e1) {
-				System.err.println("Can not create file..");
-				e1.printStackTrace();
+        if( Main.logging ) {
+	        try {
+	    		logDirectory = new File("logs");
+	    		if ( !logDirectory.isDirectory() ) {
+	    			logDirectory.mkdir();
+	    		}
+	    		date = sdf.parse(sdf.format(new Date())).toString().replaceAll(" ", "").replaceAll("[0-9]+:[0-9]+:[0-9]+CDT", "");
+	    		logFile = new FileWriter(logDirectory.getAbsolutePath() + "/" + date + ".log", true);
+	    		logFile.write(channel + ":" + sender + ":" + message + "\n");
+	    		logFile.close();
+	    	} catch (ParseException e) {
+				System.err.println("Can not parse log file.. trying to create.");
+				try {
+					logFile = new FileWriter(logDirectory.getAbsolutePath() + date + ".log", false);
+				} catch (IOException e1) {
+					System.err.println("Can not create file..");
+					e1.printStackTrace();
+				}
+				e.printStackTrace();
+	    	} catch (IOException ioex) {
+	    		System.err.println("Can not open log file..");
+	    		ioex.printStackTrace();
 			}
-			e.printStackTrace();
-    	} catch (IOException ioex) {
-    		System.err.println("Can not open log file..");
-    		ioex.printStackTrace();
-		}
+        }
 
         /*runs debugging method if activated*/
         if (Main.debug) {

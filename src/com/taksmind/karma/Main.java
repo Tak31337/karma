@@ -46,6 +46,11 @@ public class Main {
     public static boolean debug = true;
     
     /**
+     * Enable uploading logs
+     */
+    public static boolean logging = true;
+    
+    /**
      * Welcome message variable
      */
     public static boolean welcome = false;
