@@ -68,9 +68,9 @@ public class Help extends Function {
               Main.bot.sendMessage(channel, "~quit                                 (rq. access lvl 4)\n\n");
               
               Main.bot.sendMessage(channel, "    Plugin commands: \n");
-              Main.bot.sendMessage(channel, "~plugins    			(req. access lvl 4) list all plugins\n");
-              Main.bot.sendMessage(channel, "~load		*plugin*    (req. access lvl 4) load plugin\n");
-              Main.bot.sendMessage(channel, "~unload	*plugin*    (req. access lvl 4) unload plugin\n");
+              Main.bot.sendMessage(channel, "~plugins                              (req. access lvl 4) list all plugins\n");
+              Main.bot.sendMessage(channel, "~load      *plugin*                   (req. access lvl 4) load plugin\n");
+              Main.bot.sendMessage(channel, "~unload    *plugin*                   (req. access lvl 4) unload plugin\n");
         }
     }
 }
