@@ -45,7 +45,7 @@ public class FloodProtection extends Function {
         if ( bot.hasMessage() ) {
             sender = bot.getSender();
 
-            if ((!this.bot.hasTime())
+            if ((!bot.hasTime())
                     || (!addDate(sender, bot.getTime()))) {
                 return;
             }

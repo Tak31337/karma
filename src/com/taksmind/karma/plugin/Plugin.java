@@ -2,19 +2,9 @@ package com.taksmind.karma.plugin;
 
 public class Plugin {
 	private String name;
-	private String extention;
-	private String path;
 	private String command;
 	private String description;
-	private String log;
-
-	public String getPath() {
-		return this.path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
-	}
+	private String trigger;
 
 	public String getCommand() {
 		return this.command;
@@ -22,14 +12,6 @@ public class Plugin {
 
 	public void setCommand(String command) {
 		this.command = command;
-	}
-
-	public String getExtention() {
-		return this.extention;
-	}
-
-	public void setExtention(String extention) {
-		this.extention = extention;
 	}
 
 	public String getName() {
@@ -47,12 +29,12 @@ public class Plugin {
 	public String getDescription() {
 		return this.description;
 	}
-
-	public String getLogLocation() {
-		return this.log;
+	
+	public void setTrigger(String trigger) {
+		this.trigger = trigger;
 	}
-
-	public void setLogLocation(String log) {
-		this.log = log;
+	
+	public String getTrigger() {
+		return this.trigger;
 	}
 }

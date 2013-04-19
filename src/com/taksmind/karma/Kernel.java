@@ -48,6 +48,7 @@ import com.taksmind.karma.functions.Horoscope;
 import com.taksmind.karma.functions.Join;
 import com.taksmind.karma.functions.Kick;
 import com.taksmind.karma.functions.Part;
+import com.taksmind.karma.functions.PluginLoader;
 import com.taksmind.karma.functions.Quit;
 import com.taksmind.karma.functions.Say;
 import com.taksmind.karma.functions.Slap;
@@ -117,6 +118,9 @@ public class Kernel {
     private Function Register;
     private Function Login;
     private Function Access;
+    
+    //Plugin loader
+    private Function PluginLoader;
 
     /**
      * Kernel class, handles functions.
@@ -150,6 +154,8 @@ public class Kernel {
         Register = new Register();
         Login = new Login();
         Access = new Access();
+        
+        PluginLoader = new PluginLoader();
         
         /**
          * scheduled services
@@ -283,6 +289,7 @@ public class Kernel {
         publicThreadExecutor.execute( Draw );
         publicThreadExecutor.execute( GetCard );
         publicThreadExecutor.execute( Horoscope );
+        publicThreadExecutor.execute( PluginLoader );
     }
 
     /**
