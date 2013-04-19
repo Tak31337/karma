@@ -31,6 +31,7 @@ import java.util.Properties;
 
 import org.jibble.jmegahal.JMegaHal;
 
+import com.taksmind.karma.plugin.CommandLoader;
 import com.taksmind.karma.util.Delete2;
 import com.taksmind.karma.util.TakeInput;
 
@@ -41,14 +42,19 @@ import com.taksmind.karma.util.TakeInput;
  */
 public class Main {
     /**
+     * load our plugins.
+     */
+	public static CommandLoader commands;
+	
+	/**
      * debugging mode variable
      */
-    public static boolean debug = true;
+    public static boolean debug = false;
     
     /**
      * Enable uploading logs
      */
-    public static boolean logging = true;
+    public static boolean logging = false;
     
     /**
      * Welcome message variable
@@ -116,11 +122,21 @@ public class Main {
                     debug = true;
                 } else if (arg.equalsIgnoreCase("--help") || arg.equalsIgnoreCase("-h")) {
                     System.out.println("-h or --help, this menu\n"
-                                       +"--debug, enter debugging mode\n");
+                                       +"--debug, enter debugging mode\n"
+                    				   +"--autovoice to enable autovoice\n"
+                                       +"--welcome to toggle auto welcome\n"
+                    				   +"--logging to enable logging\n");
+                } else if (arg.equalsIgnoreCase("--autovoice")) {
+                	autoVoice = true;
+                } else if(arg.equalsIgnoreCase("--welcome")) {
+                	welcome = true;
+                } else if(arg.equalsIgnoreCase("--logging")) {
+                	logging = true;
                 }
             }
         }
-
+        
+        commands = new CommandLoader(); //load our plugins.
         Properties properties = new Properties(); //creates configuration object
         try {
             properties.load(new FileInputStream(configuration));

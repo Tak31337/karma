@@ -13,6 +13,7 @@ import com.taksmind.karma.Main;
 
 public class CommandLoader {
 	private static ArrayList<Plugin> plugins = new ArrayList<Plugin>();
+	private static ArrayList<Plugin> activePlugins = new ArrayList<Plugin>();
 	private static File fileDir;
 	
 	public CommandLoader() {
@@ -33,7 +34,10 @@ public class CommandLoader {
 	    	try{
 	    		Scanner s = new Scanner(f);
 	    		s.useDelimiter("\\Z");
-	    		plugins.add(new Gson().fromJson(s.next(), Plugin.class));
+	    		Plugin p = new Gson().fromJson(s.next(), Plugin.class);
+	    		plugins.add(p);
+	    		activePlugins.add(p);
+	    		p = null;
 	    		s.close();
 	    	} catch( Exception e ) {
 	    		System.err.println("Some problem parsing json");
@@ -42,22 +46,26 @@ public class CommandLoader {
 	    }
 	}
 	
-	public ArrayList<Plugin> getPlugins() {
+	public ArrayList<Plugin> getActivePlugins() {
+		return activePlugins;
+	}
+	
+	public ArrayList<Plugin> getAllPlugins() {
 		return plugins;
-	}
-	
-	public void addPlugin(Plugin p) {
-		plugins.add(p);
-	}
-	
-	public void removePlugin(Plugin p) {
-		plugins.remove(p);
 	}
 	
 	public void removePluginByName(String name) {
 		for( Plugin p : plugins ) {
 			if ( p.getName().equalsIgnoreCase(name) ) {
-				plugins.remove(p);
+				activePlugins.remove(p);
+			}
+		}
+	}
+	
+	public void addPluginByName(String name) {
+		for( Plugin p : plugins ) {
+			if ( p.getName().equalsIgnoreCase(name) ) {
+				activePlugins.add(p);
 			}
 		}
 	}

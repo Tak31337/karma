@@ -3,18 +3,15 @@ package com.taksmind.karma.functions;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.concurrent.ExecutorService;
 
 import com.taksmind.karma.Main;
-import com.taksmind.karma.plugin.CommandLoader;
 import com.taksmind.karma.plugin.Plugin;
 
 
 public class PluginLoader extends Function {
     private String message;
     private String channel;
-    private CommandLoader commands;
-    public ExecutorService pluginThreadExecutor;
+    private String plugin;
 
     @Override
     public void run() {
@@ -22,10 +19,10 @@ public class PluginLoader extends Function {
         if (bot.hasMessage()) {
             message = bot.getMessage();
             channel = bot.getChannel();
-            commands = new CommandLoader();
+            
         }
 
-        for( Plugin p : commands.getPlugins() ) {
+        for( Plugin p : Main.commands.getActivePlugins() ) {
         	if( message.startsWith(p.getTrigger()) ) {
         		tokenize(false, p.getTrigger().length(), message);
         		Runtime run = Runtime.getRuntime();
@@ -35,6 +32,7 @@ public class PluginLoader extends Function {
 						System.out.println(p.getDescription());
 					}
 					Process proc = run.exec(p.getCommand() + parameters);
+					proc.getOutputStream().close();
 					BufferedReader stdInput = new BufferedReader(new 
 				             InputStreamReader(proc.getInputStream()));
 					String s;
@@ -42,12 +40,53 @@ public class PluginLoader extends Function {
 						Main.bot.sendMessage(channel, s);
 					}
 					stdInput.close();
-					// output.append(out);
+					proc.waitFor();
 				} catch (IOException e) {
 					e.printStackTrace();
+				} catch (InterruptedException e) {
+					Main.bot.sendMessage(channel, "execution ended unexpectedly.");
+					e.printStackTrace();
 				}
-
         	}
+        }
+        
+        /*This method checks if the user has the proper access*/
+        if (checkAccess(4, bot.getSender()) == false) {
+            return;
+        }
+
+        if (message.startsWith("~load")) {
+            tokenize(true, 5, message);
+            plugin = (String) tokenParameters.nextElement();
+            
+            for( Plugin p : Main.commands.getActivePlugins() ) {
+            	if( p.getName().equalsIgnoreCase(plugin) ) {
+            		Main.bot.sendMessage(channel, "Plugin: " + plugin + " already loaded.");
+            		return;
+            	}
+            }
+            Main.bot.sendMessage(channel, "Loading: " + plugin);
+            Main.commands.addPluginByName(plugin);
+        }
+        
+        if (message.startsWith("~unload")) {
+            tokenize(true, 7, message);
+            plugin = (String) tokenParameters.nextElement();
+            
+            for( Plugin p : Main.commands.getActivePlugins() ) {
+            	if( p.getName().equalsIgnoreCase(plugin) ) {
+            		Main.bot.sendMessage(channel, "Plugin: " + plugin + " unloaded.");
+            		Main.commands.removePluginByName(p.getName());
+            		return;
+            	}
+            }
+        }
+        
+        if (message.startsWith("~plugins")) {
+        	Main.bot.sendMessage(channel, "All plugins:");
+            for( Plugin p : Main.commands.getAllPlugins() ) {
+            	Main.bot.sendMessage(channel, p.getName() + ": " + p.getDescription());
+            }
         }
     }
 }

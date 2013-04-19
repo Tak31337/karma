@@ -87,7 +87,7 @@ public class Kernel {
     /**
      * Object to handle scheduled operations.
      */
-    ScheduledExecutorService timedExecutor = Executors.newSingleThreadScheduledExecutor();
+    ScheduledExecutorService timedExecutor;
     
     /*imported events*/
     private Event Message;
@@ -161,6 +161,7 @@ public class Kernel {
          * scheduled services
          */
         if ( Main.logging ) {
+        	timedExecutor = Executors.newSingleThreadScheduledExecutor();
         	timedExecutor.schedule(Log, 10, TimeUnit.MINUTES);
         }
     }

@@ -65,7 +65,12 @@ public class Help extends Function {
               Main.bot.sendMessage(channel, "~autovoice  (toggle auto voice)       (rq. access lvl 3) \n");
               Main.bot.sendMessage(channel, "~join       *channel*                 (rq. access lvl 3) \n");
               Main.bot.sendMessage(channel, "~part       *channel* *reason*        (rq. access lvl 3) \n");
-              Main.bot.sendMessage(channel, "~quit                                 (rq. access lvl 4)\n");
+              Main.bot.sendMessage(channel, "~quit                                 (rq. access lvl 4)\n\n");
+              
+              Main.bot.sendMessage(channel, "    Plugin commands: \n");
+              Main.bot.sendMessage(channel, "~plugins    			(req. access lvl 4) list all plugins\n");
+              Main.bot.sendMessage(channel, "~load		*plugin*    (req. access lvl 4) load plugin\n");
+              Main.bot.sendMessage(channel, "~unload	*plugin*    (req. access lvl 4) unload plugin\n");
         }
     }
 }
