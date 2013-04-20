@@ -21,7 +21,7 @@ public class PluginLoader extends Function {
             channel = bot.getChannel();
             
         }
-
+        
         for( Plugin p : Main.commands.getActivePlugins() ) {
         	if( message.startsWith(p.getTrigger()) ) {
         		tokenize(false, p.getTrigger().length(), message);
@@ -40,11 +40,7 @@ public class PluginLoader extends Function {
 						Main.bot.sendMessage(channel, s);
 					}
 					stdInput.close();
-					proc.waitFor();
 				} catch (IOException e) {
-					e.printStackTrace();
-				} catch (InterruptedException e) {
-					Main.bot.sendMessage(channel, "execution ended unexpectedly.");
 					e.printStackTrace();
 				}
         	}
@@ -58,33 +54,45 @@ public class PluginLoader extends Function {
         if (message.startsWith("~load")) {
             tokenize(true, 5, message);
             plugin = (String) tokenParameters.nextElement();
-            
+            boolean load = true;
             for( Plugin p : Main.commands.getActivePlugins() ) {
             	if( p.getName().equalsIgnoreCase(plugin) ) {
             		Main.bot.sendMessage(channel, "Plugin: " + plugin + " already loaded.");
-            		return;
+            		load = false;
             	}
             }
-            Main.bot.sendMessage(channel, "Loading: " + plugin);
-            Main.commands.addPluginByName(plugin);
+            if ( load ) {
+            	Main.bot.sendMessage(channel, "Loading: " + plugin);
+            	Main.commands.addPluginByName(plugin);
+            }
         }
         
         if (message.startsWith("~unload")) {
             tokenize(true, 7, message);
             plugin = (String) tokenParameters.nextElement();
-            
+            boolean unload = false;
             for( Plugin p : Main.commands.getActivePlugins() ) {
             	if( p.getName().equalsIgnoreCase(plugin) ) {
             		Main.bot.sendMessage(channel, "Plugin: " + plugin + " unloaded.");
             		Main.commands.removePluginByName(p.getName());
-            		return;
+            		unload = true;
             	}
+            }
+            if(unload) {
+            	Main.bot.sendMessage(channel, "Plugin: " + plugin + " not loaded.");
             }
         }
         
         if (message.startsWith("~plugins")) {
         	Main.bot.sendMessage(channel, "All plugins:");
             for( Plugin p : Main.commands.getAllPlugins() ) {
+            	Main.bot.sendMessage(channel, p.getName() + ": " + p.getDescription());
+            }
+        }
+
+        if (message.startsWith("~activeplugins")) {
+        	Main.bot.sendMessage(channel, "Active plugins:");
+            for( Plugin p : Main.commands.getActivePlugins() ) {
             	Main.bot.sendMessage(channel, p.getName() + ": " + p.getDescription());
             }
         }

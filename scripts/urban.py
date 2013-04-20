@@ -12,19 +12,18 @@ class urban_diction:
     search_json = urllib.urlopen(self.url+ser_string)
     search_map = json.loads(search_json.read())
     if search_map["list"] == []:
-      print "Computer says no."
+      print("Computer says no.")
       return
     i=0
     for res in search_map["list"]:
       i += 1
-      print str(i) + ". " + res["definition"]
+      print(str(i) + ". " + res["definition"])
       if i >= 3:
           return
       
 def main():
   if len(sys.argv) < 2:
-    print "Use the correct syntax. ./urban <query string>"
-    sys.exit(0)
+      print("give me a query.")
   query = " ".join(sys.argv[1:])
   urban = urban_diction()
   urban.search(query)

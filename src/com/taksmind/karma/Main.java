@@ -49,12 +49,12 @@ public class Main {
 	/**
      * debugging mode variable
      */
-    public static boolean debug = false;
+    public static boolean debug = true;
     
     /**
      * Enable uploading logs
      */
-    public static boolean logging = false;
+    public static boolean logging = true;
     
     /**
      * Welcome message variable
