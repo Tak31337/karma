@@ -1,1 +1,1 @@
-{"name":"test","command":"python plugins/test.py","description":"test plugin","trigger":"~test"}
+{"name":"test","command":"python scripts/test.py","description":"test plugin","trigger":"~test"}

@@ -15,15 +15,19 @@ public class CommandLoader {
 	private static ArrayList<Plugin> plugins = new ArrayList<Plugin>();
 	private static ArrayList<Plugin> activePlugins = new ArrayList<Plugin>();
 	private static File fileDir;
+	Properties properties = new Properties(); //creates configuration object
 	
-	public CommandLoader() {
-	    Properties properties = new Properties(); //creates configuration object
+	public CommandLoader() {	    
 	    try {
 	        properties.load(new FileInputStream(Main.configuration));
 	        fileDir = new File(properties.getProperty("plugins"));
 	    } catch (IOException ioex) {
 	    	System.err.println("configuration file can not be accessed!");
 	    }
+	    findPlugins(true);
+	}
+	
+	private void findPlugins(boolean activateAll) {
 	    File[] files = fileDir.listFiles(new FilenameFilter() {
 	        public boolean accept(File dir, String name) {
 	            return name.toLowerCase().endsWith(".json");
@@ -35,8 +39,18 @@ public class CommandLoader {
 	    		Scanner s = new Scanner(f);
 	    		s.useDelimiter("\\Z");
 	    		Plugin p = new Gson().fromJson(s.next(), Plugin.class);
-	    		plugins.add(p);
-	    		activePlugins.add(p);
+	    		boolean add = true;
+	    		for( Plugin x : plugins ) {
+	    			if( x.getName().equalsIgnoreCase(p.getName()) ) {
+	    				add = false;
+	    			}
+	    		}
+	    		if( add ) {
+	    			plugins.add(p);
+	    		}
+	    		if(activateAll) {
+	    			activePlugins.add(p);
+	    		}
 	    		p = null;
 	    		s.close();
 	    	} catch( Exception e ) {
@@ -51,6 +65,7 @@ public class CommandLoader {
 	}
 	
 	public ArrayList<Plugin> getAllPlugins() {
+		findPlugins(false);
 		return plugins;
 	}
 	
@@ -63,6 +78,7 @@ public class CommandLoader {
 	}
 	
 	public void addPluginByName(String name) {
+		findPlugins(false);
 		for( Plugin p : plugins ) {
 			if ( p.getName().equalsIgnoreCase(name) ) {
 				activePlugins.add(p);
